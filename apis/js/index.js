@@ -1,23 +1,22 @@
-let characterList = document.querySelector(".characterList")
-
 fetch("https://rickandmortyapi.com/api/character")
+    
     .then(function(response) {
         return response.json()
     })
+
     .then(function(data) {
         console.log(data.results);
-        let characters = ``;
+        let characterList = document.querySelector(".characterList")
+        let characterArray = ``
         for (let i = 0; i < data.results.length; i++) {
-            let character = data.results[i];
-            characters += `
-            <article>
-                <img src="${characters.image}" alt="${characters.name}">
-                <p>Name: ${characters.name}</p>
-                <p>Status: ${characters.status}</p>
-            </article>`
+            characterArray = characterArray + `<article>
+                                        <img src=${data.results[i].image}>
+                                        <h2>${data.results[i].name}</h2>
+                                    </article>`
         }
-        characterList.innerHTML = characters;
+        characterList.innerHTML = characterArray
     })
+
     .catch(function(error) {
         console.log("Error: " + error);
     })
